@@ -2,7 +2,7 @@ from pathlib import Path
 
 import setuptools
 
-VERSION = "0.0.1"
+VERSION = "0.0.2"
 
 NAME = "hallelujah"
 
@@ -18,7 +18,8 @@ setuptools.setup(
     description="Compute the Approximate Vertex Cover for undirected graph encoded in DIMACS format.",
     url="https://github.com/frankvegadelgado/hallelujah",
     project_urls={
-        "Source Code": "https://github.com/frankvegadelgado/hallelujah"
+        "Source Code": "https://github.com/frankvegadelgado/hallelujah",
+        "Documentation Research": "https://dev.to/frank_vega_987689489099bf/the-hallelujah-algorithm-4bgf",
     },
     author="Frank Vega",
     author_email="vega.frank@gmail.com",

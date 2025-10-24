@@ -1,5 +1,9 @@
 # Hallelujah: Approximate Vertex Cover Solver
 
+![All things pass; God does not change (Saint Teresa of Avila).](docs/teresa.jpg)
+
+This work builds upon [The Hallelujah Algorithm](https://dev.to/frank_vega_987689489099bf/the-hallelujah-algorithm-4bgf).
+
 ---
 
 # The Minimum Vertex Cover Problem
