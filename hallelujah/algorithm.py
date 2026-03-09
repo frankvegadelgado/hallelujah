@@ -5,7 +5,6 @@ import itertools
 from . import utils
 
 import networkx as nx
-import math
 
 def find_vertex_cover(graph):
     """
@@ -81,7 +80,7 @@ def find_vertex_cover(graph):
 
         This function implements a polynomial-time reduction technique:
         1. For each vertex u with degree k, replace it with k auxiliary vertices
-        2. Each auxiliary vertex connects to one of u's original neighbors with weight 1/sqrt(k)
+        2. Each auxiliary vertex connects to one of u's original neighbors with weight 1/k
         3. Solve the resulting max-degree-1 problem optimally using a greedy algorithm
         
         Args:
@@ -105,8 +104,8 @@ def find_vertex_cover(graph):
             for i, v in enumerate(neighbors):
                 aux_vertex = (u, i)  # Auxiliary vertex naming: (original_vertex, index)
                 G.add_edge(aux_vertex, v)
-                # Weight 1/sqrt(k) balances Cauchy-Schwarz bounds for <2 approximation
-                weights[aux_vertex] = 1 / math.sqrt(k)  # k >= 1 post-isolate removal
+                # Weight 1/k balances Cauchy-Schwarz bounds for <2 approximation
+                weights[aux_vertex] = 1 / k  # k >= 1 post-isolate removal
 
         # Set node weights for the weighted vertex cover algorithm
         nx.set_node_attributes(G, weights, 'weight')
@@ -157,16 +156,22 @@ def find_vertex_cover_brute_force(graph):
     if graph.number_of_nodes() == 0 or graph.number_of_edges() == 0:
         return None
 
-    n_vertices = len(graph.nodes())
+    working_graph = graph.copy()
+    working_graph.remove_edges_from(list(nx.selfloop_edges(working_graph)))
+    working_graph.remove_nodes_from(list(nx.isolates(working_graph)))
+    
+    if working_graph.number_of_nodes() == 0:
+        return set()
+
+    n_vertices = len(working_graph.nodes())
 
     for k in range(1, n_vertices + 1): # Iterate through all possible sizes of the cover
-        for candidate in itertools.combinations(graph.nodes(), k):
+        for candidate in itertools.combinations(working_graph.nodes(), k):
             cover_candidate = set(candidate)
-            if utils.is_vertex_cover(graph, cover_candidate):
+            if utils.is_vertex_cover(working_graph, cover_candidate):
                 return cover_candidate
                 
     return None
-
 
 
 def find_vertex_cover_approximation(graph):
