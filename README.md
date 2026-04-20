@@ -221,7 +221,7 @@ options:
 # Complexity
 
 ```diff
-+ This algorithm finds near-optimal solutions for the hard Minimum Vertex Cover problem in polynomial time, with an approximation ratio below 2. This breakthrough challenges the computational boundaries and disproves the Unique Games Conjecture.
++ This algorithm finds near-optimal solutions for the hard Minimum Vertex Cover problem in polynomial time, with an approximation ratio below 2. This breakthrough challenges the computational boundaries of the Unique Games Conjecture.
 ```
 
 ---
